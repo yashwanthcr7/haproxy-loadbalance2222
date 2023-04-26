@@ -1,0 +1,29 @@
+version: '3'
+services:
+  web:
+    image: ubuntu
+    command: tail -f /dev/null # add this line
+    networks:
+      - my-network 
+  apache2:
+    image: ajay1906/apache2-server:v1.0
+    networks:
+      - my-network
+    ports:
+      - "8080:80"
+  haproxy:
+    image: ajay1906/haproxy-main:v1.0
+    networks:
+      - my-network
+    ports:
+      - "80:80"
+  nginx:
+    image: ajay1906/nginx-server:v1.0
+    networks:
+      - my-network
+    ports:
+      - "8081:80"
+networks:
+  my-network:
+    driver: bridge
+
